@@ -3,33 +3,54 @@ import React from 'react';
 import whatsAppIcon from '../../assets/images/icons/whatsapp.svg';
 
 import './styles.css'
+import api from '../../services/api';
 
-function TeacherItem() {
+export interface Teacher {
+  id: number,
+  subject: string,
+  cost: number,
+  name: string,
+  avatar: string,
+  whatsapp: string,
+  bio: string
+}
+
+interface TeacherItemProps {
+  teacher: Teacher;
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+  function createNewConnection() {
+    api.post('connections', {
+      user_id: teacher.id,
+    });
+  }
+
   return (
     <article className="teacher-item">
       <header>
-        <img src="https://avatars2.githubusercontent.com/u/33850209?s=460&u=c97d81e510e79ef043c0613491f63f37f18b8341&v=4" alt="Antônio Dias"/>
+        <img src={teacher.avatar} alt={teacher.name}/>
         <div>
-          <strong>Antônio Dias</strong>
-          <span>Laboratório de Programação 1</span>
+          <strong>{teacher.name}</strong>
+          <span>{teacher.subject}</span>
         </div>
       </header>
 
-      <p>
-        Pokem ipsum dolor sit amet Shelgon Butterfree Pokemon The Movie 2000 Meowth Natu Razor Leaf.
-        <br/>
-        Ut aliquip ex ea commodo consequat Sandshrew Meloetta Ditto Jellicent Litwick Aerodactyl.
-      </p>
+      <p>{teacher.bio}</p>
 
       <footer>
         <p>
           Preço/hora
-          <strong>R$50,00</strong>
+          <strong>R$ {teacher.cost}</strong>
         </p>
-        <button type="button">
+        <a
+          target="_blank"
+          onClick={createNewConnection}
+          href={`https://wa.me/${teacher.whatsapp}`}
+        >
           <img src={whatsAppIcon} alt="WhatsApp"/>
           Entrar em contato
-        </button>
+        </a>
       </footer>
     </article>
   )
