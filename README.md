@@ -2,7 +2,7 @@
     <img
       alt="proffy"
       title="Graphic design is my passion"
-      src="./web/src/assets/images/logo.svg"
+      src=".github/logo.svg"
       width="250px"
     />
 </h1>
@@ -28,9 +28,9 @@
 
 <br>
 
-<!-- <p align="center">
+<p align="center">
   <img alt="Frontend" src=".github/proffy.png" width="100%">
-</p> -->
+</p>
 
 ## :rocket: Built with
 
